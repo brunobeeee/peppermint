@@ -863,6 +863,7 @@ export function ticketRoutes(fastify: FastifyInstance) {
           updatedAt: true,
           type: true,
           id: true,
+          subject: true,
         },
       });
 
