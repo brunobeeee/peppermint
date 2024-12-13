@@ -59,6 +59,7 @@ async function main() {
     await prisma.emailTemplate.createMany({
       data: [
         {
+          subject: `A new ticket has been assigned to you`,
           html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html lang="en">
             <head>
@@ -98,6 +99,7 @@ async function main() {
           type: "ticket_assigned",
         },
         {
+          subject: `New comment on Issue #{title} ref: #{id}`,
           html: ` <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html lang="en">
 
@@ -138,6 +140,7 @@ async function main() {
           type: "ticket_comment",
         },
         {
+          subject: `Issue #{ticket.id} has just been created & logged`,
           html: ` <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html lang="en">
 
@@ -179,6 +182,7 @@ async function main() {
           type: "ticket_created",
         },
         {
+          subject: `Issue #{ticket.Number} status is now {ticket.status}`,
           html: ` <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html lang="en">
           
