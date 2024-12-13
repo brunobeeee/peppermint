@@ -407,6 +407,7 @@ model emailTemplate {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
+  subject String @default("Default Subject")
   html String
   type Template
 }
