@@ -16,6 +16,7 @@ export async function sendTicketCreate(ticket: any) {
       });
 
       var template = handlebars.compile(testhtml?.html);
+      const subject = testhtml?.subject || "Default Subject";
       var replacements = {
         id: ticket.id,
       };
@@ -25,7 +26,7 @@ export async function sendTicketCreate(ticket: any) {
         .sendMail({
           from: email?.reply,
           to: ticket.email,
-          subject: `Issue #${ticket.id} has just been created & logged`,
+          subject: subject.replace('{id}', ticket.id),
           text: `Hello there, Issue #${ticket.id}, which you reported on ${ticket.createdAt}, has now been created and logged`,
           html: htmlToSend,
         })

@@ -17,9 +17,14 @@ export async function sendComment(
       where: {
         type: "ticket_comment",
       },
+      select: {
+        subject: true,
+        html: true,
+      }
     });
 
     var template = handlebars.compile(testhtml?.html);
+    const subject = testhtml?.subject || "Default Subject";
     var replacements = {
       title: title,
       comment: comment,
@@ -31,7 +36,7 @@ export async function sendComment(
       .sendMail({
         from: provider?.reply,
         to: email,
-        subject: `New comment on Issue #${title} ref: #${id}`,
+        subject: subject.replace('{title}', title).replace('{id}', id),
         text: `Hello there, Issue #${title}, has had an update with a comment of ${comment}`,
         html: htmlToSend,
       })

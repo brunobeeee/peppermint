@@ -19,13 +19,14 @@ export async function sendAssignedEmail(email: any) {
       });
 
       var template = handlebars.compile(testhtml?.html);
+      const subject = testhtml?.subject || "Default Subject";
       var htmlToSend = template({}); // Pass an empty object as the argument to the template function
 
       await mail
         .sendMail({
           from: provider?.reply, 
-          to: email, 
-          subject: `A new ticket has been assigned to you`, 
+          to: email,
+          subject: subject,
           text: `Hello there, a ticket has been assigned to you`, 
           html: htmlToSend,
         })

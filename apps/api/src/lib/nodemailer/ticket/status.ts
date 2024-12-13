@@ -15,6 +15,7 @@ export async function sendTicketStatus(ticket: any) {
     });
 
     var template = handlebars.compile(testhtml?.html);
+    const subject = testhtml?.subject || "Default Subject";
     var replacements = {
       title: ticket.title,
       status: ticket.isComplete ? "COMPLETED" : "OUTSTANDING",
@@ -25,9 +26,9 @@ export async function sendTicketStatus(ticket: any) {
       .sendMail({
         from: email?.reply, 
         to: ticket.email,
-        subject: `Issue #${ticket.Number} status is now ${
+        subject: subject.replace('{title}', ticket.title).replace('{ticket.Number}', ticket.Number).replace('{ticket.status}',
           ticket.isComplete ? "COMPLETED" : "OUTSTANDING"
-        }`, 
+        ),
         text: `Hello there, Issue #${ticket.Number}, now has a status of ${
           ticket.isComplete ? "COMPLETED" : "OUTSTANDING"
         }`,
